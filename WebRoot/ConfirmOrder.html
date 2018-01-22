@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<title>我家超市</title>
+		
+		<meta charset="UTF-8">
+		<meta name="content-type" content="text/html; charset=UTF-8">
+    	<meta name="keywords" content="keyword1,keyword2,keyword3">
+    	<meta name="description" content="MySuperMarket">
+   	 	<meta name = "viewport" content = "width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scale=no">
+		
+		<link rel = "stylesheet" type = "text/css" href = "css/mui.css">
+		<script type="text/javascript" src = "js/mui.js"></script>
+		<script type="text/javascript" src = "js/jquery-3.2.1.js"></script>
+		<script type="text/javascript" src = "js/confirmOrder.js"></script>
+		<script type="text/javascript">
+			//页面数据加载
+			loadData();
+		
+			//页面元素加载完毕
+			$(document).ready(function(){
+			
+				//页面数据填充
+				initialPage();
+			
+			});
+		
+		</script>
+  </head>
+  
+  <body>
+    	
+    	<!-- 初始化参数配置 -->
+    	<script type="text/javascript">
+    		mui.init();
+    	</script>    
+    	
+    	<div class = "mui-content">
+    	
+    		<!-- 顶部返回栏 -->
+    		<header class = "mui-bar mui-bar-nav">
+    			<div class = "mui-icon mui-icon-back mui-pull-left"></div>
+    			<div class = "mui-title mui-row">确认订单</div>    			
+    		</header> 
+    		
+    		<!-- 中部信息确认 -->
+    		<div class = "mui-scroll-wrapper">
+    			<div class = "mui-scroll">
+    			
+    				<!-- 收货信息确认 -->
+    				<div id = "receiveInfo" class = "mui-card" style = "margin-top:14%;">
+    					<div class = "mui-card-header">
+    						<span class = "mui-pull-left">收货人 : <a>XXX</a></span>
+    						<span class = "mui-pull-right">15612345678</span>
+    					</div>
+    					<div class = "mui-card-content">
+    						<span class = "mui-icon mui-icon-location mui-pull-left"></span>
+    						<span style = "font-size:16px;" >收货地址 : <a>广州大学城广工生活西区</a></span>    						
+    					</div>
+    					<div class = "mui-card-footer">
+    						<span style = "color:yellow">(收货不便时,可选择免费代收货服务)</span>
+    					</div>
+    				</div>
+    			
+    				<!-- 商家商品信息 -->
+    				<div id = "goodInfo" class = "mui-card" style = "margin-top:6%">
+    					<div class = "mui-card-header mui-card-media">
+    						<img src="icon/shoplogo_default.png" style = "width:8%;height:4%;">
+    						<div class = "mui-media-body">
+    							YY旗舰店
+    						</div>
+    					</div>
+    					<div class = "mui-card-content">
+    						<ul class = "mui-table-view">
+    							<li class = "mui-table-view-cell mui-media">
+    								<a href = "javascript:;"></a>
+    								<img src="good_image/trouser_image/trouser_1.jpg" style = "width:10%;height:6%;">
+    								<div class = "mui-media-body">
+    									<span>九分裤男士休闲青年韩版修身小脚裤子弹力夏季薄款哈伦9分裤潮</span>
+    									<p>颜色 : <a>黑色</a>,尺码 : <a>29</a></p>
+    									<div><span style = "color:red">¥29.00</span><span class = "mui-pull-right">x1</span></div>
+    								</div>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
+    			
+    				<!-- 购买信息 -->
+    				<ul class = "mui-table-view">
+    					<li class = "mui-table-view-cell">
+    						<span class = "mui-pull-left">购买数量</span>
+    						<div id = "buyNum" class = "mui-numbox mui-pull-right" data-numbox-step='1' data-numbox-min='1'>
+    							<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+							    <input class="mui-numbox-input" type="number" />
+							    <button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+    						</div>
+    					</li>
+    					<li class = "mui-table-view-cell">
+    						<span class = "mui-pull-left">配送方式</span>
+    						<span style = "margin-left:44%;">快递 免邮</span>
+    						<span class = "mui-icon mui-icon-arrowright mui-pull-right"></span>
+    					</li>
+    					<li class = "mui-table-view-cell">
+    						<span class = "mui-pull-left">运费险</span>
+    						<span style = "margin-left:6%;">卖家送,确认收货前退货可赔</span>
+    						<span class = "mui-icon mui-icon-arrowright mui-pull-right"></span>
+    					</li>
+    					<li id = "goodComment" class = "mui-table-view-cell">
+    						<span class = "mui-pull-left" style = "margin-top:2%;">商家留言</span>
+    						<span class = "mui-pull-right"><input type = "text" placeholder = "选填:对本次交易的说明(建议)"></span>
+    					</li>
+    					<li id = "buySubtotal" class = "mui-table-view-cell">    						
+    						<span class = "mui-pull-right">共<span>1</span>件商品 小计 : ¥<span style = "color:red;font-size:22px;">29.00</span></span>
+    					</li>
+    				</ul>
+    			
+    				<!-- 底部提交订单 -->
+		    		<div class = "mui-row">
+		    			<span id = "buyTotal" style = "margin-left:36%;">合计 : ¥<span style = "color:red;font-size:24px;">29.00</span></span>
+		    			<a href = "#popover" id = "openPopover" type = "button" class = "mui-btn mui-btn-danger">提交订单</a>
+		    		</div>
+    			
+    			</div>
+    		</div><!-- endwith mui-scroll-wrapper -->
+ 			<script type="text/javascript">
+				mui('.mui-scroll-wrapper').scroll({
+					 scrollY: true, //是否竖向滚动
+					 scrollX: false, //是否横向滚动
+					 startX: 0, //初始化时滚动至x
+					 startY: 0, //初始化时滚动至y
+					 indicators: false, //是否显示滚动条
+					 deceleration:0.0006, //阻尼系数,系数越小滑动越灵敏
+					 bounce: true //是否启用回弹
+				});
+			</script>	
+    	    		   	
+    	</div><!-- endwith mui-content -->	
+    	
+    	<!-- 支付页面弹出页面,必须位于mui-content外,否则弹出时被遮蒙板遮住 -->
+    	<div id = "popover" class = "mui-popover" style = "margin-left:1%;width:100%;">
+    		<ul class = "mui-table-view">
+    			<li class = "mui-table-view-cell">    				
+    				<span class = "mui-icon mui-icon-closeempty mui-pull-left"></span>
+    				<span style = "margin-left:34%">付款详情</span>
+    				<span class = "mui-icon mui-icon-help mui-pull-right"></span>
+    			</li>
+    			<li class = "mui-table-view-cell">    				
+    				<span class = "mui-pull-left">支付宝账号</span>
+    				<span class = "mui-pull-right">156******76</span>
+    			</li>
+    			<li class = "mui-table-view-cell">    				
+    				<span class = "mui-pull-left">需付款</span>
+    				<span class = "mui-pull-right"><a style = "color:blue;font-size:24px">29.00</a>元</span>
+    			</li>
+    			<li class = "mui-table-view-cell">    				
+    				<span style = "margin-left:38%;">输入密码</span>
+    			</li>
+    			<li id = "payPassword_numbox" class = "mui-table-view-cell">      						
+    				<input class="mui-numbox-input" type="password" style = "width:12%;margin-left:12%;" maxlength = 1/>
+    				<input class="mui-numbox-input" type="password" style = "width:12%;" maxlength = 1/>
+    				<input class="mui-numbox-input" type="password" style = "width:12%;" maxlength = 1/>
+    				<input class="mui-numbox-input" type="password" style = "width:12%;" maxlength = 1/>
+    				<input class="mui-numbox-input" type="password" style = "width:12%;" maxlength = 1/>
+    				<input class="mui-numbox-input" type="password" style = "width:12%;" maxlength = 1/>
+    			</li>
+    			 
+    			<li class = "mui-table-view-cell" style = "margin-top:2%;margin-bottom:4%;">    				
+    				<button id = "postBtn" type = "button" class = "mui-btn mui-btn-success mui-pull-right">确认</button>
+    			</li>
+    			
+    		</ul>    		    		
+    	</div>    			
+    	
+  </body>
+</html>

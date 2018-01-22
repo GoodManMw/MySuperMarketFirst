@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<title>我家超市</title>
+		
+		<meta charset="UTF-8">
+		<meta name="content-type" content="text/html; charset=UTF-8">
+    	<meta name="keywords" content="keyword1,keyword2,keyword3">
+    	<meta name="description" content="MySuperMarket">
+   	 	<meta name = "viewport" content = "width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scale=no">
+		
+		<link rel = "stylesheet" type = "text/css" href = "css/mui.css">
+		<script type="text/javascript" src = "js/mui.js"></script>
+		<script type="text/javascript" src = "js/jquery-3.2.1.js"></script>
+		
+		<script type="text/javascript">
+			
+			var datatopost = "{'name' : '黄铭尉', 'phone' : 1562640437, 'address' : '广州大学城广东工业大学生活西区三栋205', 'shop_id' : 1, 'good_id' : 3, 'choose' : [{'choose_name' : '颜色', 'choose_value' : '蓝色'},{'choose_name' : '尺码', 'choose_value' : 30}],'good_num' : 1, 'sum_price' : 45, 'good_comment' : '', 'pay_account' : 1562640437, 'pay_password' : '123456'}";
+		
+			$(document).ready(function(){
+				
+				$('#clickme').click(function(){
+					$.post("postorder.spring", {
+						
+						'order' : datatopost
+						
+					}, function(data, status){
+						console.log(JSON.stringify(data));
+					});
+				});
+			
+				$('#uploadbtn').click(function(){			
+					var file =  document.getElementById("fileUpload");
+					$.ajax({
+		                url:"uploadimage.spring",
+		                type:"post",
+		                data:file.serialize(),
+		                processData:false,
+		                contentType:false,
+		                success:function(data){
+		                   // window.clearInterval(timer);
+		                    console.log("upload success");
+		                },
+		                error:function(data){
+		                	console.log("upload error");
+		                }
+					});
+
+				});
+				
+			});
+		
+		
+		</script>
+		
+	</head>
+	<body>
+			
+		<!-- 文件上传表单 -->
+		<form action="uploadimage.spring" method = "post" enctype = "multipart/form-data">
+			<input type = "file" name = "uploadfile"/>
+			<input type = "submit" value = "点击上传"/>
+		</form>
+		<img src="good_image/wechat_background.png">
+					 
+	</body>
+	
+</html>

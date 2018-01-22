@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<title>我家超市</title>
+		
+		<meta charset="UTF-8">
+		<meta name="content-type" content="text/html; charset=UTF-8">
+    	<meta name="keywords" content="keyword1,keyword2,keyword3">
+    	<meta name="description" content="MySuperMarket">
+   	 	<meta name = "viewport" content = "width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scale=no">
+		
+		<link rel = "stylesheet" type = "text/css" href = "css/mui.css">
+		<script type="text/javascript" src = "js/mui.js"></script>
+		
+		<script type="text/javascript" src = "js/jquery-3.2.1.js"></script>
+		<!-- 引入本页面的js文件 -->
+		<script type="text/javascript" src = "js/firstPage.js"></script>
+		<script type="text/javascript">
+			
+			 //页面数据加载
+			 var dataload = "{'datanum' : 4, 'lastid' : 0}"
+			 sessionStorage.setItem("loadlastid", 4);
+			 $.post("loadgooddata.spring", {
+			 	
+			 	'dataload' : dataload
+			 	
+			 }, function(data, status){
+			 				 	
+			 	//调用createGoodCard创建商品浏览卡片
+			 	createGoodCard(data);
+			 	
+			 });
+		
+			 //页面数据加载完毕
+			 $(document).ready(function(){
+
+			 	//调用 goodDetail 跳转到到Good_Details.html页面			 	
+			 	mui("#good_card_content").on('tap', '.good_card', function(event){
+			 		
+			 		 //console.log("点击的event是 : ");
+ 					 //console.log(event);
+ 					 //console.log(event.detail.target.parentNode.parentNode);
+ 					 var good_card = event.detail.target.parentNode.parentNode;
+ 					 console.log(good_card.children);
+			 		goodDetail(good_card);
+			 		
+			 	});
+			 	
+			 });			 
+		
+		</script>
+
+  </head>
+  
+  <body>
+    <!-- 初始化参数配置 -->
+		<script type="text/javascript">
+			mui.init({
+			  pullRefresh : {
+			    container:"#good_content",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+			      up:{
+			      style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+			      color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+			      height:'50px',//可选,默认50px.下拉刷新控件的高度,
+			      range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+			      offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+			      auto: false,//可选,默认false.首次加载自动上拉刷新一次
+			      callback :function(){/*console.log("刷个头");this.endPullupToRefresh(false);*/Refresh();}//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据;
+    			}
+  			}
+		});
+		</script>
+		
+		<div class = "mui-content">
+		
+			<!-- 顶部扫码 搜索 消息提醒一栏 -->
+			<header class = "mui-bar mui-bar-nav">
+				<div class = " mui-icon mui-icon-reload mui-pull-left"></div>
+				<div class = "mui-title mui-input-row mui-search" style = "margin-left:0%;opacity:0.38;">
+					<input type = "search" placeholder = "搜索商品">
+				</div>
+				<div class = "mui-icon mui-icon-chatbubble mui-pull-right"></div>
+			</header>
+			
+			<!-- 中部内容区域, 可滑动div -->
+			<div class = "mui-scroll-wrapper" id = "good_content">
+				<div class = "mui-scroll">		
+					
+					<!-- 此处为焦点轮播图(广告位) -->
+					 <div class="mui-slider">
+					  	<div class="mui-slider-group mui-slider-loop">
+					  		<!--支持循环，需要重复图片节点-->
+					  		<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="advertisement_images/4.jpg" /></a></div>
+						    <div class="mui-slider-item"><a href="#"><img src="advertisement_images/1.jpg" /></a></div>
+						    <div class="mui-slider-item"><a href="#"><img src="advertisement_images/2.jpg" /></a></div>
+						    <div class="mui-slider-item"><a href="#"><img src="advertisement_images/3.jpg" /></a></div>
+						    <div class="mui-slider-item"><a href="#"><img src="advertisement_images/4.jpg" /></a></div>
+						    <!--支持循环，需要重复图片节点-->
+		    				<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="advertisement_images/1.jpg" /></a></div>
+					  	</div>
+					</div>
+					<!-- 必须启动轮播, 默认是不自动切换图片 -->
+					<script type="text/javascript">
+						//获得slider插件对象
+						var gallery = mui('.mui-slider');
+						gallery.slider({
+			 				interval:1000//自动轮播周期，若为0则不自动播放，默认为0;
+						});
+					</script>
+					
+					<!-- 10宫格导航栏 -->
+					<div style = "margin-top:2%;">
+						<ul class = "mui-table-view mui-grid-view mui-grid-6" style = "margin-top:0px;margin-bottom:0px;">
+							 <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/buycar.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">购物车</span>
+		                     	</a>
+		                     </li>
+		                     <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/gift.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">小商品</span>
+		                     	</a>
+		                     </li>
+		                     <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/logistics.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">物流</span>
+		                     	</a>
+		                     </li>
+		                     <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/open.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">热卖</span>
+		                     	</a>
+		                     </li>
+		                     <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/sale.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">优惠购</span>
+		                     	</a>
+		                     </li>
+		                     <li id="home" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+		                      	<a href="#">
+		                          	<img src="icon/setting.png" style = "width:28%;height:12%;">
+		                        	<span class="mui-media-body">管理</span>
+		                     	</a>
+		                     </li>                    
+						</ul>
+					</div>
+					
+					<!-- 热卖消息报 -->
+					<div  class = "mui-row" style = "margin-left:10%;margin-top:2%">
+						<span class = "mui-pull-left"><img src="icon/quickreport.png" style = "width:48%;height:24%"></span>
+						<div style = "width:30%;height:11%;float:left;overflow:hidden;">
+							<span>热卖 快抢购</span>
+						</div>
+						<span class = "mui-pull-right"><img src="icon/charactermore.png" style = "width:48%;height:24%"></span>
+					</div>
+
+					<!-- 商品卡片视图 可动态的添加商品-->
+					<div id = "good_card_content">
+						<!-- 
+						<div class = "mui-card good_card">
+							<div class = "mui-card-content">
+								<img src="good_image/trouser_image/trouser_1.jpg">
+							</div>
+							<div class = "mui-card-footer">
+								<a id = "1"></a>
+								<div style = "width:52%;">
+									九分裤男士绅士休闲裤青年韩版修身 小脚裤子弹力
+								</div>
+								<div style = "width:10%;">
+									<span style = "margin-left:4%;">¥29</span>
+								</div>
+								<div style = "width:30%;">
+									<span style = "margin-left:10%;">37025人付款</span>
+								</div>						
+							</div>
+						</div>
+						<div class = "mui-card good_card">
+							<div class = "mui-card-content">
+								<img src="good_image/trouser_image/trouser_2.jpg">
+							</div>
+							<div class = "mui-card-footer">
+								<div style = "width:52%;">
+									休闲九分裤 男 夏季牛仔裤男薄韩版潮流2017
+								</div>
+								<div style = "width:10%;">
+									<span style = "margin-left:4%;">¥29.90</span>
+								</div>
+								<div style = "width:30%;">
+									<span style = "margin-left:10%;">12600人付款</span>
+								</div>						
+							</div>
+						</div>
+						<div class = "mui-card good_card">
+							<div class = "mui-card-content">
+								<img src="good_image/accessory_image/accessory_1.jpg">
+							</div>
+							<div class = "mui-card-footer">
+								<div style = "width:52%;">
+									日韩小清新电镀925纯银闪亮不褪色铃铛
+								</div>
+								<div style = "width:10%;">
+									<span style = "margin-left:4%;">¥20.80</span>
+								</div>
+								<div style = "width:30%;">
+									<span style = "margin-left:10%;">1501人付款</span>
+								</div>						
+							</div>
+						</div>
+						<div class = "mui-card good_card">
+						<div class = "mui-card-content">
+							<img src="good_image/accessory_image/accessory_2.jpg">
+						</div>
+						<div class = "mui-card-footer">
+							<div style = "width:52%;">
+								kakakaoo阿沁同款925银丝绒红色爱心珍珠...
+							</div>
+							<div style = "width:10%;">
+								<span style = "margin-left:4%;">¥19.97</span>
+							</div>
+							<div style = "width:30%;">
+								<span style = "margin-left:10%;">1072人付款</span>
+							</div>						
+						</div>
+					</div>
+					 -->						
+					</div><!-- endwith good_card_content -->
+						 
+				</div>
+			</div><!-- endwith mui-scroll-wrapper -->
+			<script type="text/javascript">
+				mui('.mui-scroll-wrapper').scroll({
+					 scrollY: true, //是否竖向滚动
+					 scrollX: false, //是否横向滚动
+					 startX: 0, //初始化时滚动至x
+					 startY: 0, //初始化时滚动至y
+					 indicators: false, //是否显示滚动条
+					 deceleration:0.0005, //阻尼系数,系数越小滑动越灵敏
+					 bounce: true //是否启用回弹
+				});
+			</script>	
+		
+			
+		</div>
+  </body>
+</html>

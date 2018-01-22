@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>我家超市</title>
+	
+	<meta charset="UTF-8">
+	<meta name="content-type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+   	<meta name="description" content="MySuperMarket">
+   	<meta name = "viewport" content = "width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scale=no">
+    
+    <link rel="stylesheet" type="text/css" href="css/mui.css">
+	<script type="text/javascript" src = "js/mui.js"></script>
+	<script type="text/javascript" src = "js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src = "js/login.js"></script>
+  </head>
+  
+  <body>
+    
+    <!-- 初始化参数配置 -->
+		<script type="text/javascript">
+			mui.init()
+		</script>
+    
+    <div class = "mui-content">
+    
+    <!-- 登录表格 -->
+   	<form class = "mui-input-group" style = "width:80%;height:32%;margin-left:10%;margin-top:50%;border-radius:16px;">
+   		<div class = "mui-button-row">
+   			<span style = "padding-top:4%">我家超市</span>
+   		</div>	
+   		<div class = "mui-input-row">
+   			<label>用户名</label>
+   			<input type = "text" class = "mui-input-clear" placeholder = "请输入用户名">
+   		</div>
+   		<div class = "mui-input-row">
+   			<label>密码</label>
+   			<input type = "password" class = "mui-input-password" placeholder = "请输入密码">
+   		</div>
+   		<div class = "mui-button-row">
+   			<button id = "login_button" type = "button" class = "mui-btn mui-btn-success mui-btn-outlined" onclick = "login()">正确</button>
+   			<button type = "button" class = "mui-btn mui-btn-primary mui-btn-outlined">注册</button>	  			
+   		</div>
+   		<div class = "mui-button-row">
+   			<a href = "#" style = "font-size:12px">忘记密码</a>
+   			<a href = "#" style = "margin-left:60%;font-size:12px">了解我们</a>
+   		</div>
+   	</form>
+   	
+   	</div>
+    
+  </body>
+</html>

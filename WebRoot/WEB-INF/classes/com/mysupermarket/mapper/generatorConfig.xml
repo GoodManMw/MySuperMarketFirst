@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <classPathEntry location="C:\Users\mwwh\Downloads\mysql-connector-java-5.1.40\mysql-connector-java-5.1.40-bin.jar" />
+  <context id="generatorJava" >
+  <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/mysupermarket" userId="root" password="806517wh" />
+  <!--配置持久类生成的目标文件夹-->
+  <javaModelGenerator targetPackage="com.mysupermarket.pojo" targetProject="MySuperMarket" />
+  <!--配置映射的mapper.xml文件的目标文件夹-->
+  <sqlMapGenerator targetPackage="com.mysupermarket.mapper" targetProject="MySuperMarket" />
+  <!--配置mapper.xml的接口的目标文件夹-->
+  <javaClientGenerator targetPackage="com.mysupermarket.mapper" targetProject="MySuperMarket" type="XMLMAPPER" />
+  <!--<table schema="mysupermarket" tableName="buy_car"></table>
+  <table schema="mysupermarket" tableName="good"></table>
+  <table schema="mysupermarket" tableName="good_buycar"></table>
+  <table schema="mysupermarket" tableName="good_detail"></table>
+  <table schema="mysupermarket" tableName="good_evaluate"></table>
+  <table schema="mysupermarket" tableName="good_kind"></table>
+  <table schema="mysupermarket" tableName="order"></table>
+  <table schema="mysupermarket" tableName="pay_account"></table>
+  <table schema="mysupermarket" tableName="receive_info"></table>
+  
+  <table schema="mysupermarket" tableName="shop_account"></table>
+  <table schema="mysupermarket" tableName="user_account"></table>
+  <table schema="mysupermarket" tableName="indent"></table>-->
+  <table schema="mysupermarket" tableName="record_pay_account"></table>
+  </context>
+</generatorConfiguration>
